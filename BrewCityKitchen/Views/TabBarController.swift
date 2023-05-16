@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController, UITabBarControllerDelegate {
+final class TabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +24,12 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let signUpViewController = SignUpViewController()
         signUpViewController.title = "Sign Up"
         
-        self.viewControllers = [appStartViewController,loginViewController,signUpViewController]
+        let profileViewController = ProfileViewController()
+        profileViewController.title = "Profile"
+        
+        let ordersViewController = OrdersViewController()
+        ordersViewController.title = "Orders"
+        
+        self.setViewControllers([appStartViewController], animated: true)
     }
 }

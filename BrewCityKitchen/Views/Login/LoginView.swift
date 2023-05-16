@@ -17,13 +17,13 @@ final class LoginView: UIView {
         return label
     }()
     
-    private lazy var loginBtn: ButtonView = {
+    private lazy var loginButton: ButtonView = {
         let btn = ButtonView()
         btn.configuration = btn.createButtonFilledConfiguration(title: "Login", background: .black, foreground: .white)
         return btn
     }()
 
-    private lazy var signUpBtn: ButtonView = {
+    private lazy var signUpButton: ButtonView = {
         let btn = ButtonView()
         btn.configuration = btn.createButtonFilledConfiguration(title: "Sign Up", background: .secondarySystemBackground, foreground: .black)
         return btn
@@ -42,6 +42,7 @@ final class LoginView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textAlignment = .left
         textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
         return textField
     }()
     
@@ -49,7 +50,7 @@ final class LoginView: UIView {
         var stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         stackView.axis = .vertical
-        stackView.spacing = Constants.Spacing.Small.value
+        stackView.spacing = Constants.Spacing.XSmall.value
         return stackView
     }()
     
@@ -57,7 +58,7 @@ final class LoginView: UIView {
         var stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         stackView.axis = .vertical
-        stackView.spacing = Constants.Spacing.XXSmall.value
+        stackView.spacing = Constants.Spacing.XSmall.value
         return stackView
     }()
     
@@ -87,8 +88,8 @@ final class LoginView: UIView {
         componentsStackView.addArrangedSubview(formStackView)
         componentsStackView.addArrangedSubview(buttonStackView)
         
-        buttonStackView.addArrangedSubview(loginBtn)
-        buttonStackView.addArrangedSubview(signUpBtn)
+        buttonStackView.addArrangedSubview(loginButton)
+        buttonStackView.addArrangedSubview(signUpButton)
         
         formStackView.addArrangedSubview(emailField)
         formStackView.addArrangedSubview(passwordField)

@@ -8,10 +8,23 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    
+    private lazy var signUpView = SignUpView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
+    }
+    
+    private func setupView() {
+        self.view.backgroundColor = .systemBackground
+        self.view.addSubview(signUpView)
+        
+        NSLayoutConstraint.activate([
+            signUpView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            signUpView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            signUpView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
+        ])
     }
 
 }

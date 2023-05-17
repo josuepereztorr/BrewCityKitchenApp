@@ -17,13 +17,13 @@ class SignUpViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .systemBackground
-        self.view.addSubview(signUpView)
+        view.backgroundColor = .systemBackground
+        view.addSubview(signUpView)
         
         NSLayoutConstraint.activate([
-            signUpView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 25),
-            signUpView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            signUpView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
+            signUpView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            signUpView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            signUpView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
         ])
     }
 

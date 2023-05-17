@@ -20,17 +20,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = TabBarController()
         
-//        var isAuth = false
+        // setup controllers
+        let configuration = UIImage.SymbolConfiguration(scale: .large)
         
-//        if (!isAuth) {
-//
-//            let loginController = LoginViewController()
-//
-//            window.rootViewController = loginController
-//            window.makeKeyAndVisible()
-//            self.window = window
-//            isAuth = !isAuth
-//        }
+        let menuViewController = MenuViewController()
+        let menuTabImage = UIImage(systemName: "fork.knife", withConfiguration: configuration)
+        menuViewController.tabBarItem = UITabBarItem(title: "Menu", image: menuTabImage, tag: 1)
+        
+        let ordersViewController = OrdersViewController()
+        let ordersTabImage = UIImage(systemName: "takeoutbag.and.cup.and.straw.fill", withConfiguration: configuration)
+        ordersViewController.tabBarItem = UITabBarItem(title: "Orders", image: ordersTabImage, tag: 2)
+        
+        let profileViewController = ProfileViewController()
+        let profileTabImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
+        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: profileTabImage, tag: 3)
+        
+        let menuNavigationController = UINavigationController(rootViewController: menuViewController)
+        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        let ordersNavigationController = UINavigationController(rootViewController: ordersViewController)
+
+        tabBarController.setViewControllers([ordersNavigationController, profileNavigationController], animated: true)
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()

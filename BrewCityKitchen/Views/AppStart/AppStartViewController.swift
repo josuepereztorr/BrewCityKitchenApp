@@ -17,15 +17,15 @@ class AppStartViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .systemBackground
-        self.view.addSubview(appStartView)
+        view.backgroundColor = .systemBackground
+        view.addSubview(appStartView)
         
         NSLayoutConstraint.activate([
-            appStartView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            appStartView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            appStartView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
-            appStartView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            appStartView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
+            appStartView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            appStartView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            appStartView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -60),
+            appStartView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            appStartView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
         ])
     }
 }

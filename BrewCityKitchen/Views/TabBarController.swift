@@ -15,21 +15,21 @@ final class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func setupTabBarControllers() {
-        let appStartViewController = AppStartViewController()
-        appStartViewController.title = "App Start"
+//        let appStartViewController = AppStartViewController()
+//        appStartViewController.title = "App Start"
+//
+//        let loginViewController = LoginViewController()
+//        loginViewController.title = "Login"
+//
+//        let signUpViewController = SignUpViewController()
+//        signUpViewController.title = "Sign Up"
         
-        let loginViewController = LoginViewController()
-        loginViewController.title = "Login"
-        
-        let signUpViewController = SignUpViewController()
-        signUpViewController.title = "Sign Up"
-        
-        let profileViewController = ProfileViewController()
-        profileViewController.title = "Profile"
-        
-        let ordersViewController = OrdersViewController()
-        ordersViewController.title = "Orders"
-        
-        self.setViewControllers([appStartViewController], animated: true)
+//        let profileViewController = ProfileViewController()
+//        let ordersViewController = OrdersViewController()
+//        
+//        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+//        let ordersNavigationController = UINavigationController(rootViewController: ordersViewController)
+//        
+//        self.setViewControllers([ordersNavigationController, profileNavigationController], animated: true)
     }
 }

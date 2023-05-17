@@ -18,13 +18,13 @@ class LoginViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .systemBackground
-        self.view.addSubview(loginView)
+        view.backgroundColor = .systemBackground
+        view.addSubview(loginView)
         
         NSLayoutConstraint.activate([
-            loginView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 25),
-            loginView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
-            loginView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
+            loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
+            loginView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 40),
+            loginView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
         ])
     }
 }

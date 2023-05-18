@@ -11,7 +11,7 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "MenuItemCollectionViewCell"
     
-    private lazy var imageView: UIImageView = {
+    var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "carrot.fill", withConfiguration: configuration)
         let imageView = UIImageView(image: image)
@@ -21,7 +21,7 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var priceLabel: UILabel = {
+    var priceLabel: UILabel = {
         let label = UILabel()
         label.text = "$0.00"
         label.textColor = .label
@@ -32,7 +32,7 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var nameLabel: UILabel = {
+    var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Menu Item Name"
         label.textColor = .label
@@ -69,10 +69,10 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
         selectedBackgroundView = UIView()
         selectedBackgroundView?.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         
-        let insetXMain = CGFloat(20)
-        let insetYMain = CGFloat(5)
+        let insetXMain = CGFloat(15)
+        let insetYMain = CGFloat(10)
         
-        let insetXComponent = CGFloat(10)
+        let insetXComponent = CGFloat(5)
         let insetYComponent = CGFloat(3)
         
         NSLayoutConstraint.activate([
@@ -90,7 +90,7 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
 
             nameLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: insetYComponent),
             nameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: insetXComponent),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -insetXComponent),
             
             seperatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),

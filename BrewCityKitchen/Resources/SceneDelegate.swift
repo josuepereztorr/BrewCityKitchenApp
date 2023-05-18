@@ -55,6 +55,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
+        
+        // Core Data - prepopulate menu items
+        let context = CoreDataManager.shared
+        context.prePopulateItems()
+        
         self.window = window
     }
 

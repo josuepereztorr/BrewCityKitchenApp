@@ -27,5 +27,4 @@ class ProfileViewController: UIViewController {
             profileView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -40)
         ])
     }
-    
 }

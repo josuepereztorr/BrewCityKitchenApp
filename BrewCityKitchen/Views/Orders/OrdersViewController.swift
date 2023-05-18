@@ -16,11 +16,11 @@ class OrdersViewController: UIViewController {
         return collectionView
     }()
     
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
+    
     enum Section {
         case main
     }
-    
-    var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()

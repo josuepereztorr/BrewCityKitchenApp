@@ -16,17 +16,20 @@ class MenuViewController: UIViewController {
         return collectionView
     }()
     
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    private let context = CoreDataManager.shared
+    private let viewModel = MenuListViewModel()
+    
     enum Section {
         case main
     }
-    
-    var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Menu"
         view.backgroundColor = .systemBackground
+        collectionView.delegate = self
         
         setupView()
         configureDataSource()
@@ -59,8 +62,8 @@ class MenuViewController: UIViewController {
     
     private func configureDataSource() {
     
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexpath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexpath: IndexPath, identifier: Item) -> UICollectionViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MenuItemCollectionViewCell.cellIdentifier,
@@ -68,14 +71,27 @@ class MenuViewController: UIViewController {
                 fatalError("Cannot create new cell")
             }
             
+//            let item = context.fetchItem(id: identifier.objectID)
+            
+            cell.nameLabel.text = identifier.itemName
+            cell.priceLabel.text = "$\(identifier.itemPrice)"
+            
             return cell
         }
         
 
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(0..<5))
-        dataSource.apply(snapshot, animatingDifferences: true)
+        snapshot.appendItems(context.fetchItems(), toSection: .main)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
+}
+
+extension MenuViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let item = Item(context: context.context)
+        let detailViewController = MenuItemDetailViewController(menuItem: viewModel.menuItems[indexPath.row])
+        present(detailViewController, animated: true)
+    }
 }

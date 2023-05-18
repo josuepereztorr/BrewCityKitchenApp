@@ -16,9 +16,27 @@ class MenuViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var newOrderButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.title = "New Order"
+        config.baseBackgroundColor = .black
+        config.baseForegroundColor = .white
+        config.buttonSize = .large
+        config.cornerStyle = .medium
+        
+        var button = UIButton(configuration: config)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(createNewOrder), for: .touchUpInside)
+        return button
+    }()
+    
+    private var isNewOrderCreated = false
+    
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     
     private let context = CoreDataManager.shared
+    
+    private var currentOrder: Order? = nil
     
     enum Section {
         case main
@@ -31,6 +49,10 @@ class MenuViewController: UIViewController {
         view.backgroundColor = .systemBackground
         collectionView.delegate = self
         
+        if (isNewOrderCreated) {
+            newOrderButton.alpha = 0
+        }
+        
         setupView()
         configureDataSource()
     }
@@ -38,12 +60,24 @@ class MenuViewController: UIViewController {
     private func setupView() {
         collectionView.register(MenuItemCollectionViewCell.self, forCellWithReuseIdentifier: MenuItemCollectionViewCell.cellIdentifier)
         view.addSubview(collectionView)
+        view.addSubview(newOrderButton)
+        
+        let insetXMain = CGFloat(7)
+        let insetYMain = CGFloat(5)
+        
+//        let insetXComponent = CGFloat(5)
+        let insetYComponent = CGFloat(5)
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: newOrderButton.topAnchor, constant: -insetYMain),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            newOrderButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: insetXMain),
+            newOrderButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -insetYComponent),
+            newOrderButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -insetXMain),
+            newOrderButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
@@ -101,7 +135,27 @@ extension MenuViewController : UICollectionViewDelegate {
             return
         }
         
-        let detailViewController = MenuItemDetailViewController(menuItem: item)
+        guard let currentOrder = currentOrder else {
+            print("No order has been created")
+            return
+        }
+        
+        let detailViewController = MenuItemDetailViewController(item: item, currentOrder: currentOrder)
+        
         present(detailViewController, animated: true)
+    }
+}
+
+extension MenuViewController {
+    @objc private func createNewOrder() {
+        // create a new order
+        currentOrder = context.createOrder()
+        print("New Order Created")
+
+        isNewOrderCreated = true
+        
+        if (isNewOrderCreated) {
+            newOrderButton.alpha = 0
+        }
     }
 }

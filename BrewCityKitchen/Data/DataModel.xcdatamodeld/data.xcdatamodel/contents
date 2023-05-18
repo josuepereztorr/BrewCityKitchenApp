@@ -8,7 +8,9 @@
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="items" inverseEntity="Order"/>
     </entity>
     <entity name="Order" representedClassName="Order" syncable="YES">
-        <attribute name="id" attributeType="String"/>
+        <attribute name="orderId" attributeType="String"/>
+        <attribute name="orderStatus" optional="YES" attributeType="String"/>
+        <attribute name="orderTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="order" inverseEntity="Item"/>
     </entity>
 </model>

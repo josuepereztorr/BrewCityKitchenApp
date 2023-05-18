@@ -39,7 +39,7 @@ class MenuItemDetailView: UIView {
         return label
     }()
         
-    let actionButton: UIButton = {
+    let addItemButton: UIButton = {
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .black
         config.baseForegroundColor = .white
@@ -49,9 +49,19 @@ class MenuItemDetailView: UIView {
         let btn = UIButton(configuration: config)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
-//        button.addTarget(self, action: #selector(secondaryButtonTapped), for: .touchUpInside)
-//        return button
     }()
+    
+//    let continueToMenuButton: UIButton = {
+//        var config = UIButton.Configuration.bordered()
+//        config.baseBackgroundColor = .tertiarySystemBackground
+//        config.baseForegroundColor = .black
+//        config.buttonSize = .large
+//        config.cornerStyle = .medium
+//        
+//        let btn = UIButton(configuration: config)
+//        btn.translatesAutoresizingMaskIntoConstraints = false
+//        return btn
+//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,7 +76,8 @@ class MenuItemDetailView: UIView {
         addSubview(imageView)
         addSubview(titleLabel)
         addSubview(descriptionLabel)
-        addSubview(actionButton)
+        addSubview(addItemButton)
+//        addSubview(continueToMenuButton)
         
         backgroundColor = .systemBackground
 
@@ -91,11 +102,13 @@ class MenuItemDetailView: UIView {
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
             descriptionLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.40),
             
-            actionButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
-            actionButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
-            actionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
+            addItemButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+            addItemButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
+            addItemButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
+//
+//            continueToMenuButton.topAnchor.constraint(equalTo: addItemButton.bottomAnchor, constant: 10),
+//            continueToMenuButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
+//            continueToMenuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
         ])
     }
-    
-
 }

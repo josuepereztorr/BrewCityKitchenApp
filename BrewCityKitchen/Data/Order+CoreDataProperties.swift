@@ -16,8 +16,11 @@ extension Order {
         return NSFetchRequest<Order>(entityName: "Order")
     }
 
-    @NSManaged public var id: String
+    @NSManaged public var orderId: String
     @NSManaged public var items: NSSet?
+    @NSManaged public var orderStatus: String
+    @NSManaged public var orderTotal: Double
+
 
 }
 

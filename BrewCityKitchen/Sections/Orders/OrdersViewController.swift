@@ -16,7 +16,9 @@ class OrdersViewController: UIViewController {
         return collectionView
     }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Order>! = nil
+    
+    private let context = CoreDataManager.shared
     
     enum Section {
         case main
@@ -29,6 +31,10 @@ class OrdersViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         configureHierarchy()
+//        configureDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         configureDataSource()
     }
     
@@ -61,8 +67,8 @@ class OrdersViewController: UIViewController {
     
     private func configureDataSource() {
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexpath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Order>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexpath: IndexPath, identifier: Order) -> UICollectionViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: OrderCollectionViewCell.cellIdentifier,
@@ -70,12 +76,15 @@ class OrdersViewController: UIViewController {
                 fatalError("Cannot create new cell")
             }
             
+            cell.statusLabel.text = identifier.orderStatus
+            cell.orderIdLabel.text = "Order #\(String((identifier.orderId).prefix(5)))"
+            
             return cell
         }
         
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Order>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(0..<5))
+        snapshot.appendItems(context.fetchOrders(), toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

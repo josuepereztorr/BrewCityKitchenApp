@@ -42,7 +42,7 @@ class CheckoutViewController: UIViewController {
     
     private lazy var checkoutButton: UIButton = {
         var config = UIButton.Configuration.filled()
-        config.title = "Checkout"
+        config.title = "Confirm Purchase"
         config.baseBackgroundColor = .black
         config.baseForegroundColor = .white
         config.buttonSize = .large
@@ -72,18 +72,32 @@ class CheckoutViewController: UIViewController {
     
     private let context = CoreDataManager.shared
     
+    private var currentOrder: Order
+    
     enum Section {
         case main
     }
-
+    
+    init(currentOrder: Order) {
+        self.currentOrder = currentOrder
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Checkout"
         view.backgroundColor = .systemBackground
-        collectionView.delegate = self
         
         setupView()
+//        configureDataSource()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         configureDataSource()
     }
     
@@ -154,7 +168,7 @@ class CheckoutViewController: UIViewController {
             cell.itemId = identifier.itemId
             cell.nameLabel.text = identifier.itemName
             cell.priceLabel.text = "$\(identifier.itemPrice)"
-            
+
             return cell
         }
         
@@ -167,48 +181,18 @@ class CheckoutViewController: UIViewController {
 
 }
 
-extension CheckoutViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        collectionView.deselectItem(at: indexPath, animated: true)
-//
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? MenuItemCollectionViewCell else {
-//                return
-//        }
-//
-//        guard let item = self.context.fetchItem(id: cell.itemId) else {
-//            print("fetch request failed because the cell.itemID was null")
-//            return
-//        }
-//
-//        let detailViewController = MenuItemDetailViewController(menuItem: item)
-//
-//        present(detailViewController, animated: true)
-    }
-}
-
 extension CheckoutViewController {
     @objc private func checkout() {
+        context.context.insert(currentOrder)
+        context.updateOrder()
         
+        context.fetchVariable()[0].isNewOrderCreated = false
+        
+        dismiss(animated: true)
     }
     
     @objc private func dismissViewControllers() {
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
-                return
-            }
-            
-            var topViewController = window.rootViewController
-            
-            // Find the top-most presented view controller
-            while let presentedViewController = topViewController?.presentedViewController {
-                topViewController = presentedViewController
-            }
-            
-            // Dismiss the top-most presented view controller and its presented view controllers recursively
-            while let presentedViewController = topViewController?.presentedViewController {
-                presentedViewController.dismiss(animated: true, completion: nil)
-                topViewController = presentedViewController
-            }
+        dismiss(animated: true)
     }
 }
 

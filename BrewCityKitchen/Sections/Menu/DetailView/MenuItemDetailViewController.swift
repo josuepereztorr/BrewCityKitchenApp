@@ -47,6 +47,7 @@ class MenuItemDetailViewController: UIViewController {
 //        cardView.photoImageView.image = UIImage(named: "example_photo")
         modalView.addItemButton.configuration?.title = "Add to Order"
         modalView.addItemButton.addTarget(self, action: #selector(addToOrder), for: .touchUpInside)
+        modalView.continueToMenuButton.addTarget(self, action: #selector(dismissViewControllers), for: .touchUpInside)
         modalView.titleLabel.text = item.itemName
         modalView.descriptionLabel.text = item.itemDescription
     }
@@ -55,11 +56,15 @@ class MenuItemDetailViewController: UIViewController {
         currentOrder.addToItems(item)
         print("\(item.itemName) added to the order")
         
-        let checkoutViewController = CheckoutViewController()
-//        let checkoutNavigationController = UINavigationController(rootViewController: checkoutViewController)
-//        checkoutViewController.navigationController?.navigationBar.prefersLargeTitles = true
+        let checkoutViewController = CheckoutViewController(currentOrder: currentOrder)
          
         present(checkoutViewController, animated: true)
     }
     
+}
+
+extension MenuItemDetailViewController {
+    @objc private func dismissViewControllers() {
+        dismiss(animated: true)
+    }
 }

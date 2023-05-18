@@ -30,7 +30,7 @@ class MenuViewController: UIViewController {
         return button
     }()
     
-    private var isNewOrderCreated = false
+    var isNewOrderCreated: Bool = false
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
     
@@ -57,6 +57,15 @@ class MenuViewController: UIViewController {
         configureDataSource()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        isNewOrderCreated = context.fetchVariable()[0].isNewOrderCreated
+        print(isNewOrderCreated)
+        
+        if (!isNewOrderCreated) {
+            newOrderButton.alpha = 1
+        }
+    }
+    
     private func setupView() {
         collectionView.register(MenuItemCollectionViewCell.self, forCellWithReuseIdentifier: MenuItemCollectionViewCell.cellIdentifier)
         view.addSubview(collectionView)
@@ -75,9 +84,9 @@ class MenuViewController: UIViewController {
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
             
             newOrderButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: insetXMain),
-            newOrderButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -insetYComponent),
+            newOrderButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
             newOrderButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -insetXMain),
-            newOrderButton.heightAnchor.constraint(equalToConstant: 44)
+            newOrderButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -150,8 +159,10 @@ extension MenuViewController {
     @objc private func createNewOrder() {
         // create a new order
         currentOrder = context.createOrder()
+
         print("New Order Created")
 
+        context.fetchVariable()[0].isNewOrderCreated = true
         isNewOrderCreated = true
         
         if (isNewOrderCreated) {

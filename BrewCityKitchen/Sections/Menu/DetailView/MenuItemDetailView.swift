@@ -51,17 +51,18 @@ class MenuItemDetailView: UIView {
         return btn
     }()
     
-//    let continueToMenuButton: UIButton = {
-//        var config = UIButton.Configuration.bordered()
-//        config.baseBackgroundColor = .tertiarySystemBackground
-//        config.baseForegroundColor = .black
-//        config.buttonSize = .large
-//        config.cornerStyle = .medium
-//        
-//        let btn = UIButton(configuration: config)
-//        btn.translatesAutoresizingMaskIntoConstraints = false
-//        return btn
-//    }()
+    let continueToMenuButton: UIButton = {
+        var config = UIButton.Configuration.bordered()
+        config.title = "Return to Menu"
+        config.baseBackgroundColor = .tertiarySystemBackground
+        config.baseForegroundColor = .black
+        config.buttonSize = .large
+        config.cornerStyle = .medium
+        
+        let btn = UIButton(configuration: config)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,12 +78,12 @@ class MenuItemDetailView: UIView {
         addSubview(titleLabel)
         addSubview(descriptionLabel)
         addSubview(addItemButton)
-//        addSubview(continueToMenuButton)
+        addSubview(continueToMenuButton)
         
         backgroundColor = .systemBackground
 
         let insetXMain = CGFloat(20)
-        let insetYComponent = CGFloat(5)
+        let insetYComponent = CGFloat(10)
         let insetYMain = CGFloat(10)
         
         NSLayoutConstraint.activate([
@@ -100,15 +101,22 @@ class MenuItemDetailView: UIView {
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
 //            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -insetYComponent),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
-            descriptionLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.40),
+//            descriptionLabel.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.40),
             
-            addItemButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
+//            addItemButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             addItemButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
             addItemButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
-//
-//            continueToMenuButton.topAnchor.constraint(equalTo: addItemButton.bottomAnchor, constant: 10),
-//            continueToMenuButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
-//            continueToMenuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
+
+            continueToMenuButton.topAnchor.constraint(equalTo: addItemButton.bottomAnchor, constant: insetYComponent),
+            continueToMenuButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: insetXMain),
+            continueToMenuButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -insetXMain),
+            continueToMenuButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -insetYMain)
         ])
+    }
+}
+
+extension MenuItemDetailView {
+    @objc private func checkout() {
+        
     }
 }

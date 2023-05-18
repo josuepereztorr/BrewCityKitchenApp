@@ -11,7 +11,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "OrderCollectionViewCell"
     
-    private lazy var imageView: UIImageView = {
+     var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "car", withConfiguration: configuration)
         let imageView = UIImageView(image: image)
@@ -20,9 +20,8 @@ class OrderCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var statusLabel: UILabel = { 
+    var statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "PENDING"
         label.textColor = .label
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.textAlignment = .left
@@ -30,9 +29,8 @@ class OrderCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var orderIdLabel: UILabel = {
+    var orderIdLabel: UILabel = {
         let label = UILabel()
-        label.text = "Order #56"
         label.textColor = .label
         label.font = .systemFont(ofSize: 18, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false

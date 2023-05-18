@@ -55,6 +55,12 @@ struct CoreDataManager {
         return item
     }
     
+    func createVariable() {
+        let variable = Variables(context: context)
+        variable.isNewOrderCreated = false
+        context.insert(variable)
+    }
+    
     func fetchItem(id: String) -> Item? {
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "itemId == %@", id)
@@ -67,6 +73,20 @@ struct CoreDataManager {
         }
         
         return item.first
+    }
+    
+    func fetchVariable() -> [Variables] {
+        let fetchRequest: NSFetchRequest<Variables> = Variables.fetchRequest()
+        fetchRequest.fetchLimit = 1
+        var variable: [Variables] = []
+        
+        do {
+            variable = try context.fetch(fetchRequest)
+        } catch let error {
+            print("Failed to fetch item: \(error)")
+        }
+        
+        return variable
     }
     
     func fetchItems() -> [Item] {
@@ -117,6 +137,19 @@ extension CoreDataManager {
     
     func removeMenuItems() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Item.fetchRequest()
+
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+                try context.execute(deleteRequest)
+                try context.save()
+            } catch {
+                print("Error deleting entities: \(error)")
+            }
+    }
+    
+    func removeAllOrders() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Order.fetchRequest()
 
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 

@@ -13,4 +13,7 @@
         <attribute name="orderTotal" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="order" inverseEntity="Item"/>
     </entity>
+    <entity name="Variables" representedClassName="Variables" syncable="YES">
+        <attribute name="isNewOrderCreated" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
 </model>

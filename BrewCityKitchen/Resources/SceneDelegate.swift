@@ -38,20 +38,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let ordersTabImage = UIImage(systemName: "takeoutbag.and.cup.and.straw.fill", withConfiguration: configuration)
         ordersViewController.tabBarItem = UITabBarItem(title: "Orders", image: ordersTabImage, tag: 2)
         
-        
-        let profileViewController = ProfileViewController()
-        let profileTabImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
-        profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: profileTabImage, tag: 3)
-        
+        // new order init
+        var isNewOrderCreated = false
+
         let menuNavigationController = UINavigationController(rootViewController: menuViewController)
         menuNavigationController.navigationBar.prefersLargeTitles = isLargeTitle
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-        profileNavigationController.navigationBar.isHidden = true
+        
         let ordersNavigationController = UINavigationController(rootViewController: ordersViewController)
         ordersNavigationController.navigationBar.prefersLargeTitles = isLargeTitle
 
         
-        tabBarController.setViewControllers([menuNavigationController, ordersNavigationController, profileNavigationController], animated: true)
+        tabBarController.setViewControllers([menuNavigationController, ordersNavigationController], animated: true)
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
@@ -59,8 +56,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Core Data - prepopulate menu items
         let context = CoreDataManager.shared
         
+        context.createVariable()
 //        context.populateMenu()
 //        context.removeMenuItems()
+//        context.removeAllOrders()
 
         self.window = window
     }

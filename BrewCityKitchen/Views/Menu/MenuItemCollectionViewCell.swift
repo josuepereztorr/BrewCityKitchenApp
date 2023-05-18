@@ -1,40 +1,43 @@
 //
-//  OrderCollectionViewCell.swift
+//  MenuItemCollectionViewCell.swift
 //  BrewCityKitchen
 //
-//  Created by Josue Perez Torres on 5/15/23.
+//  Created by Josue Perez Torres on 5/17/23.
 //
 
 import UIKit
 
-class OrderCollectionViewCell: UICollectionViewCell {
+class MenuItemCollectionViewCell: UICollectionViewCell {
     
-    static let cellIdentifier = "OrderCollectionViewCell"
+    static let cellIdentifier = "MenuItemCollectionViewCell"
     
     private lazy var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
-        let image = UIImage(systemName: "car", withConfiguration: configuration)
+        let image = UIImage(systemName: "carrot.fill", withConfiguration: configuration)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.backgroundColor = .orange
         return imageView
     }()
     
-    private lazy var statusLabel: UILabel = { 
+    private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "PENDING"
+        label.text = "$0.00"
         label.textColor = .label
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 22, weight: .regular)
+//        label.backgroundColor = .systemRed
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var orderIdLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Order #56"
+        label.text = "Menu Item Name"
         label.textColor = .label
-        label.font = .systemFont(ofSize: 18, weight: .medium)
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+//        label.backgroundColor = .systemBlue
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         return label
@@ -57,9 +60,10 @@ class OrderCollectionViewCell: UICollectionViewCell {
     }
     
     func setupView() {
+//        contentView.backgroundColor = .green
         contentView.addSubview(imageView)
-        contentView.addSubview(statusLabel)
-        contentView.addSubview(orderIdLabel)
+        contentView.addSubview(priceLabel)
+        contentView.addSubview(nameLabel)
         contentView.addSubview(seperatorView)
         
         selectedBackgroundView = UIView()
@@ -69,24 +73,25 @@ class OrderCollectionViewCell: UICollectionViewCell {
         let insetYMain = CGFloat(5)
         
         let insetXComponent = CGFloat(10)
+        let insetYComponent = CGFloat(3)
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: insetYMain),
             imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: insetXMain),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -insetYMain),
-            imageView.rightAnchor.constraint(equalTo: statusLabel.leftAnchor, constant: -insetXComponent),
+            imageView.rightAnchor.constraint(equalTo: priceLabel.leftAnchor, constant: -insetXComponent),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.25),
             
-            statusLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            statusLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: insetXComponent),
-            statusLabel.bottomAnchor.constraint(equalTo: orderIdLabel.topAnchor, constant: -insetYMain),
-            statusLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -insetXMain),
-            statusLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.5),
+            priceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            priceLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: insetXComponent),
+            priceLabel.bottomAnchor.constraint(equalTo: nameLabel.topAnchor, constant: -insetYComponent),
+            priceLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -insetXMain),
+            priceLabel.heightAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 0.5),
 
-            orderIdLabel.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: insetYMain),
-            orderIdLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: insetXComponent),
-            orderIdLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
-            orderIdLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -insetXComponent),
+            nameLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: insetYComponent),
+            nameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: insetXComponent),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -15),
+            nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -insetXComponent),
             
             seperatorView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
             seperatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),

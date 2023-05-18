@@ -9,35 +9,42 @@ import UIKit
 
 class OrdersViewController: UIViewController {
     
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .systemBackground
+        return collectionView
+    }()
+    
     enum Section {
         case main
     }
     
     var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
-    
-    var collectionView: UICollectionView! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Orders"
+        view.backgroundColor = .systemBackground
         
         configureHierarchy()
         configureDataSource()
     }
     
-    private func setupTabBarImage(imageName: String, title: String) {
-        let configuration = UIImage.SymbolConfiguration(scale: .large)
-        let image = UIImage(systemName: imageName, withConfiguration: configuration)
-        tabBarItem = UITabBarItem(title: title, image: image, tag: 2)
-    }
-    
     private func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .systemBackground
         collectionView.register(OrderCollectionViewCell.self, forCellWithReuseIdentifier: OrderCollectionViewCell.cellIdentifier)
         view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -45,7 +52,7 @@ class OrdersViewController: UIViewController {
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .fractionalHeight(0.1))
+                                               heightDimension: .absolute(80))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -53,13 +60,10 @@ class OrdersViewController: UIViewController {
     }
     
     private func configureDataSource() {
-        
-        // Create Diffable Data Source and connect to Collection View
-        // has a @escaping closure
+
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexpath: IndexPath, identifier: Int) -> UICollectionViewCell? in
             
-            // a contructor that passes the collection view as input, and returns a cell as output
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: OrderCollectionViewCell.cellIdentifier,
                 for: indexpath) as? OrderCollectionViewCell else {
@@ -69,10 +73,9 @@ class OrdersViewController: UIViewController {
             return cell
         }
         
-        // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(0..<2))
+        snapshot.appendItems(Array(0..<5))
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

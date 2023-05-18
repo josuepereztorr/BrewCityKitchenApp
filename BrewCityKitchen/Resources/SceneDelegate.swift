@@ -20,26 +20,38 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let tabBarController = TabBarController()
         
+//        UITabBar.appearance().backgroundColor = UIColor(red:1, green:0, blue:0, alpha:1)
+        UITabBar.appearance().backgroundColor = .systemBackground
+        UITabBar.appearance().tintColor = .black
+//        UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
+        
         // setup controllers
         let configuration = UIImage.SymbolConfiguration(scale: .large)
+        let isLargeTitle = true
         
         let menuViewController = MenuViewController()
         let menuTabImage = UIImage(systemName: "fork.knife", withConfiguration: configuration)
         menuViewController.tabBarItem = UITabBarItem(title: "Menu", image: menuTabImage, tag: 1)
+        menuViewController.tabBarItem.badgeColor = .black
         
         let ordersViewController = OrdersViewController()
         let ordersTabImage = UIImage(systemName: "takeoutbag.and.cup.and.straw.fill", withConfiguration: configuration)
         ordersViewController.tabBarItem = UITabBarItem(title: "Orders", image: ordersTabImage, tag: 2)
+        
         
         let profileViewController = ProfileViewController()
         let profileTabImage = UIImage(systemName: "person.fill", withConfiguration: configuration)
         profileViewController.tabBarItem = UITabBarItem(title: "Profile", image: profileTabImage, tag: 3)
         
         let menuNavigationController = UINavigationController(rootViewController: menuViewController)
+        menuNavigationController.navigationBar.prefersLargeTitles = isLargeTitle
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        profileNavigationController.navigationBar.isHidden = true
         let ordersNavigationController = UINavigationController(rootViewController: ordersViewController)
+        ordersNavigationController.navigationBar.prefersLargeTitles = isLargeTitle
 
-        tabBarController.setViewControllers([ordersNavigationController, profileNavigationController], animated: true)
+        
+        tabBarController.setViewControllers([menuNavigationController, ordersNavigationController, profileNavigationController], animated: true)
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()

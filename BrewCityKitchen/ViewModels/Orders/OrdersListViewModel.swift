@@ -7,6 +7,6 @@
 
 import UIKit
 
-class OrdersListViewModel: NSObject {
+class OrdersListViewModel {
 
 }

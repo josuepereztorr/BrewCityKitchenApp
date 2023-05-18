@@ -27,7 +27,8 @@
 		CAF376372A131A6500653CDE /* OrdersListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF376362A131A6500653CDE /* OrdersListViewModel.swift */; };
 		CAF376392A13270C00653CDE /* OrderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF376382A13270C00653CDE /* OrderCollectionViewCell.swift */; };
 		CAF3763C2A14768900653CDE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF3763B2A14768900653CDE /* MenuViewController.swift */; };
-		CAF3763E2A14780F00653CDE /* MenuCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF3763D2A14780F00653CDE /* MenuCollectionViewCell.swift */; };
+		CAF376402A159DB300653CDE /* MenuItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF3763F2A159DB300653CDE /* MenuItemCollectionViewCell.swift */; };
+		CAF376452A15B30E00653CDE /* MenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF376442A15B30E00653CDE /* MenuListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +54,8 @@
 		CAF376362A131A6500653CDE /* OrdersListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersListViewModel.swift; sourceTree = "<group>"; };
 		CAF376382A13270C00653CDE /* OrderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCollectionViewCell.swift; sourceTree = "<group>"; };
 		CAF3763B2A14768900653CDE /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
-		CAF3763D2A14780F00653CDE /* MenuCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionViewCell.swift; sourceTree = "<group>"; };
+		CAF3763F2A159DB300653CDE /* MenuItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		CAF376442A15B30E00653CDE /* MenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 		CAED54EA2A0DBFEF00B5DC55 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				CAF376432A15B2C900653CDE /* Menu */,
 				CAF376352A131A2400653CDE /* Orders */,
 			);
 			path = ViewModels;
@@ -211,7 +214,15 @@
 			isa = PBXGroup;
 			children = (
 				CAF3763B2A14768900653CDE /* MenuViewController.swift */,
-				CAF3763D2A14780F00653CDE /* MenuCollectionViewCell.swift */,
+				CAF3763F2A159DB300653CDE /* MenuItemCollectionViewCell.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		CAF376432A15B2C900653CDE /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				CAF376442A15B30E00653CDE /* MenuListViewModel.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -286,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAF376402A159DB300653CDE /* MenuItemCollectionViewCell.swift in Sources */,
 				CAED54F52A0DD89500B5DC55 /* SignUpViewController.swift in Sources */,
 				CAF376322A13188B00653CDE /* OrdersListView.swift in Sources */,
 				CAF3762F2A1316B400653CDE /* ProfileView.swift in Sources */,
@@ -294,7 +306,6 @@
 				CAED54D62A0DB47B00B5DC55 /* SceneDelegate.swift in Sources */,
 				CAED54EF2A0DD84100B5DC55 /* LoginView.swift in Sources */,
 				CAED55042A12C65F00B5DC55 /* AppStartView.swift in Sources */,
-				CAF3763E2A14780F00653CDE /* MenuCollectionViewCell.swift in Sources */,
 				CAF376392A13270C00653CDE /* OrderCollectionViewCell.swift in Sources */,
 				CAF3762D2A1316A700653CDE /* ProfileViewController.swift in Sources */,
 				CAED55082A12CD5300B5DC55 /* Constants.swift in Sources */,
@@ -305,6 +316,7 @@
 				CAED55002A12C62B00B5DC55 /* AppStartViewController.swift in Sources */,
 				CAED54ED2A0DD82E00B5DC55 /* LoginViewController.swift in Sources */,
 				CAED54FC2A12BEEC00B5DC55 /* ButtonView.swift in Sources */,
+				CAF376452A15B30E00653CDE /* MenuListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

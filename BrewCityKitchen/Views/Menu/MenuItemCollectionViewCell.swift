@@ -11,6 +11,8 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
     
     static let cellIdentifier = "MenuItemCollectionViewCell"
     
+    var itemId: String = ""
+    
     var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "carrot.fill", withConfiguration: configuration)

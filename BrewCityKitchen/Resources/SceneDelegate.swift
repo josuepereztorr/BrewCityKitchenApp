@@ -58,8 +58,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Core Data - prepopulate menu items
         let context = CoreDataManager.shared
-        context.prePopulateItems()
         
+//        context.populateMenu()
+//        context.removeMenuItems()
+
         self.window = window
     }
 

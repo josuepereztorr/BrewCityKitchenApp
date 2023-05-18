@@ -9,7 +9,11 @@ import UIKit
 
 class MenuItemDetailViewController: UIViewController {
     
-    var menuItem: MenuItemModel
+    var item: Item
+    
+    private let context = CoreDataManager.shared
+    
+    var itemId: String = " "
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,8 +21,8 @@ class MenuItemDetailViewController: UIViewController {
         setupView()
     }
     
-    init(menuItem: MenuItemModel) {
-        self.menuItem = menuItem
+    init(menuItem: Item) {
+        self.item = menuItem
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,8 +48,8 @@ class MenuItemDetailViewController: UIViewController {
         
 //        cardView.photoImageView.image = UIImage(named: "example_photo")
         cardView.actionButton.configuration?.title = "Add to Order"
-        cardView.titleLabel.text = menuItem.name
-        cardView.descriptionLabel.text = menuItem.description
+        cardView.titleLabel.text = item.itemName
+        cardView.descriptionLabel.text = item.itemDescription
     }
     
     

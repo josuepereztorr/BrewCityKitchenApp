@@ -17,8 +17,8 @@ class MenuViewController: UIViewController {
     }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    
     private let context = CoreDataManager.shared
-    private let viewModel = MenuListViewModel()
     
     enum Section {
         case main
@@ -71,8 +71,7 @@ class MenuViewController: UIViewController {
                 fatalError("Cannot create new cell")
             }
             
-//            let item = context.fetchItem(id: identifier.objectID)
-            
+            cell.itemId = identifier.itemId
             cell.nameLabel.text = identifier.itemName
             cell.priceLabel.text = "$\(identifier.itemPrice)"
             
@@ -90,8 +89,19 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let item = Item(context: context.context)
-        let detailViewController = MenuItemDetailViewController(menuItem: viewModel.menuItems[indexPath.row])
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MenuItemCollectionViewCell else {
+                return
+        }
+        
+        guard let item = self.context.fetchItem(id: cell.itemId) else {
+            print("fetch request failed because the cell.itemID was null")
+            return
+        }
+        
+        let detailViewController = MenuItemDetailViewController(menuItem: item)
         present(detailViewController, animated: true)
     }
 }

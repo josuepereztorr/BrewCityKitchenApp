@@ -11,10 +11,11 @@ class MenuItemDetailView: UIView {
     
     let imageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(systemName: "car"))
+        imageView.tintColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .systemPink
+        imageView.backgroundColor = .white
         return imageView
     }()
         

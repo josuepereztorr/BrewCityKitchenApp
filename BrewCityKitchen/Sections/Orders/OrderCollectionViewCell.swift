@@ -13,7 +13,7 @@ class OrderCollectionViewCell: UICollectionViewCell {
     
      var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
-        let image = UIImage(systemName: "car", withConfiguration: configuration)
+        let image = UIImage(systemName: "fork.knife.circle", withConfiguration: configuration)
         let imageView = UIImageView(image: image)
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false

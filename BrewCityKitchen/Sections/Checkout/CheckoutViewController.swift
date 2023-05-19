@@ -177,6 +177,11 @@ class CheckoutViewController: UIViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(context.fetchItems(), toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: false)
+        
+//        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+//        snapshot.appendSections([.main])
+//        snapshot.appendItems(, toSection: .main)
+//        dataSource.apply(snapshot, animatingDifferences: false)
     }
 
 }
@@ -194,6 +199,15 @@ extension CheckoutViewController {
     @objc private func dismissViewControllers() {
         dismiss(animated: true)
     }
+}
+
+extension CheckoutViewController {
+//    func calculateTotal(order: Order) {
+//        let orderTotal: Double = 0.00
+//
+//
+//    }
+    
 }
 
 

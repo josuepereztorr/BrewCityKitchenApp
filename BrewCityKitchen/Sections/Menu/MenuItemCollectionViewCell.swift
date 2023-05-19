@@ -15,8 +15,9 @@ class MenuItemCollectionViewCell: UICollectionViewCell {
     
     var imageView: UIImageView = {
         let configuration = UIImage.SymbolConfiguration(scale: .medium)
-        let image = UIImage(systemName: "carrot.fill", withConfiguration: configuration)
+        let image = UIImage(systemName: "takeoutbag.and.cup.and.straw.fill", withConfiguration: configuration)
         let imageView = UIImageView(image: image)
+        imageView.tintColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
 //        imageView.backgroundColor = .orange
